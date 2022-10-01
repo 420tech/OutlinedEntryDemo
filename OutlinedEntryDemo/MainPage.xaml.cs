@@ -1,4 +1,7 @@
-﻿namespace OutlinedEntryDemo;
+﻿using Microsoft.Maui.Platform;
+using OutlinedEntryDemo.Handlers;
+
+namespace OutlinedEntryDemo;
 
 public partial class MainPage : ContentPage
 {
@@ -7,6 +10,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
+		ModifyEntry();
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
@@ -20,6 +24,21 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
+
+    void ModifyEntry()
+    {
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(BorderlessEntry), (handler, view) =>
+        {
+#if ANDROID
+            handler.PlatformView.SetBackgroundColor(Colors.Transparent.ToPlatform());
+#elif IOS
+            handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+#elif WINDOWS
+            //handler.PlatformView.FontWeight = Microsoft.UI.Text.FontWeights.Thin;
+			handler.PlatformView.BorderBrush = Colors.Transparent.ToPlatform();
+#endif
+        });
+    }
 }
 
 

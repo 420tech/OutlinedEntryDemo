@@ -4,6 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maui="using:Microsoft.Maui"
     xmlns:local="using:OutlinedEntryDemo.WinUI">
-
+    <maui:MauiWinUIApplication.Resources>
+        <Thickness x:Key="TextControlBorderThemeThickness">0</Thickness>
+        <Thickness x:Key="TextControlBorrderThemeThicknessFocused">0</Thickness>
+    </maui:MauiWinUIApplication.Resources>
 </maui:MauiWinUIApplication>
 
